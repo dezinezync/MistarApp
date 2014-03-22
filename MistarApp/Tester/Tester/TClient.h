@@ -14,6 +14,6 @@
 - (void)getHTML;
 - (NSString *)percentEscapeString:(NSString *)string;
 - (void)loginToMistarWithPin:(NSString *)pin password:(NSString *)password success:(void (^)(void))successHandler failure:(void (^)(void))failureHandler;
-- (void)requestMainPage;
+- (NSData *)requestMainPage;
 
 @end

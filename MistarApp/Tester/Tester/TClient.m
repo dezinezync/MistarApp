@@ -74,8 +74,9 @@
      }];
 }
 
-- (void)requestMainPage {
+- (NSData *)requestMainPage {
     
+    NSData *returner;
     //Now redirect to assignments page
     
     NSURL *homeURL = [NSURL URLWithString:@"https://mistar.oakland.k12.mi.us/novi/StudentPortal/Home/PortalMainPage"];
@@ -97,13 +98,14 @@
                  
                  NSString *homePage = [[NSString alloc] initWithData:homeData encoding:NSUTF8StringEncoding];
                  NSLog(@"Response was not JSON (from home), it was = %@", homePage);
+                 return homePage;
              }
          }
          else {
              NSLog(@"error: %@", homeError);
          }
+         return [NSString stringWithFormat:@"%@", homeData];
      }];
-    
 }
 
 
