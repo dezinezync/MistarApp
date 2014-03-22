@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		469E904C18D8C33E00007E18 /* MAClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 469E904B18D8C33E00007E18 /* MAClient.m */; };
 		46AA0AC518D7DD560048481F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AA0AC418D7DD560048481F /* Foundation.framework */; };
 		46AA0AC718D7DD560048481F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AA0AC618D7DD560048481F /* CoreGraphics.framework */; };
 		46AA0AC918D7DD560048481F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AA0AC818D7DD560048481F /* UIKit.framework */; };
@@ -19,6 +20,7 @@
 		46AA0AE018D7DD560048481F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AA0AC818D7DD560048481F /* UIKit.framework */; };
 		46AA0AE818D7DD560048481F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46AA0AE618D7DD560048481F /* InfoPlist.strings */; };
 		46AA0AEA18D7DD560048481F /* MistarAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AA0AE918D7DD560048481F /* MistarAppTests.m */; };
+		46BEEB4518D9EF2600926858 /* MAStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46BEEB4418D9EF2600926858 /* MAStoryboard.storyboard */; };
 		46E7A55718D7E2DD00ED0E30 /* MAController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E7A55618D7E2DD00ED0E30 /* MAController.m */; };
 		49B7EA29DBE745A095CBFE7B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 051D66C4F64447B2A03FB097 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		051D66C4F64447B2A03FB097 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		469E904A18D8C33E00007E18 /* MAClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAClient.h; sourceTree = "<group>"; };
+		469E904B18D8C33E00007E18 /* MAClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAClient.m; sourceTree = "<group>"; };
 		46AA0AC118D7DD560048481F /* MistarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MistarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46AA0AC418D7DD560048481F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		46AA0AC618D7DD560048481F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,6 +55,7 @@
 		46AA0AE518D7DD560048481F /* MistarAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MistarAppTests-Info.plist"; sourceTree = "<group>"; };
 		46AA0AE718D7DD560048481F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		46AA0AE918D7DD560048481F /* MistarAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MistarAppTests.m; sourceTree = "<group>"; };
+		46BEEB4418D9EF2600926858 /* MAStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MAStoryboard.storyboard; sourceTree = "<group>"; };
 		46E7A55518D7E2DD00ED0E30 /* MAController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAController.h; sourceTree = "<group>"; };
 		46E7A55618D7E2DD00ED0E30 /* MAController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAController.m; sourceTree = "<group>"; };
 		88B602C155934EDDBA92537B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -118,8 +123,11 @@
 			children = (
 				46E7A55518D7E2DD00ED0E30 /* MAController.h */,
 				46E7A55618D7E2DD00ED0E30 /* MAController.m */,
+				46BEEB4418D9EF2600926858 /* MAStoryboard.storyboard */,
 				46AA0AD318D7DD560048481F /* MAAppDelegate.h */,
 				46AA0AD418D7DD560048481F /* MAAppDelegate.m */,
+				469E904A18D8C33E00007E18 /* MAClient.h */,
+				469E904B18D8C33E00007E18 /* MAClient.m */,
 				46AA0AD618D7DD560048481F /* Images.xcassets */,
 				46AA0ACB18D7DD560048481F /* Supporting Files */,
 			);
@@ -235,6 +243,7 @@
 			files = (
 				46AA0ACF18D7DD560048481F /* InfoPlist.strings in Resources */,
 				46AA0AD718D7DD560048481F /* Images.xcassets in Resources */,
+				46BEEB4518D9EF2600926858 /* MAStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +297,7 @@
 			files = (
 				46AA0AD518D7DD560048481F /* MAAppDelegate.m in Sources */,
 				46E7A55718D7E2DD00ED0E30 /* MAController.m in Sources */,
+				469E904C18D8C33E00007E18 /* MAClient.m in Sources */,
 				46AA0AD118D7DD560048481F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

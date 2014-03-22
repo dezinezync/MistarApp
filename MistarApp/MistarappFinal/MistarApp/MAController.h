@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MAClient.h"
 
 @interface MAController : UIViewController
+<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @end
