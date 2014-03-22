@@ -12,6 +12,7 @@
 
 @interface TParse : NSObject
 
+- (NSString *)userIDRegex:(NSData *)data;
 - (void)parseForUserID;
 
 @end

@@ -11,9 +11,9 @@
 @interface TClient : NSObject
 
 - (void)print;
-- (void)getHTML;
 - (NSString *)percentEscapeString:(NSString *)string;
 - (void)loginToMistarWithPin:(NSString *)pin password:(NSString *)password success:(void (^)(void))successHandler failure:(void (^)(void))failureHandler;
-- (NSData *)requestMainPage;
++ (void)downloadUserID:(void(^)(NSString *result))handler;
+- (NSString *)getUserID;
 
 @end

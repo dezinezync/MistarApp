@@ -49,7 +49,7 @@
              if (responseJSON) {
                  // the response was JSON and we successfully decoded it
                  
-                 NSLog(@"Response was = %@", responseJSON);
+                 //NSLog(@"Response was = %@", responseJSON);
                  
                  // assuming you validated that everything was successful, call the success block
                  
@@ -59,14 +59,14 @@
                  // the response was not JSON, so let's see what it was so we can diagnose the issue
                  
                  NSString *loggedInPage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                 NSLog(@"Response was not JSON (from login), it was = %@", loggedInPage);
+                 //NSLog(@"Response was not JSON (from login), it was = %@", loggedInPage);
                  
                  if (failureHandler)
                      failureHandler();
              }
          }
          else {
-             NSLog(@"error: %@", error);
+             //NSLog(@"error: %@", error);
              
              if (failureHandler)
                  failureHandler();
@@ -74,17 +74,17 @@
      }];
 }
 
-- (NSData *)requestMainPage {
-    
-    NSData *returner;
++ (void)downloadUserID:(void(^)(NSString *result))handler {
     //Now redirect to assignments page
+    
+    __block NSMutableString *returnString = [[NSMutableString alloc] init]; //'__block' so that it has a direct connection to both scopes, in the method AND in the block
+    
     
     NSURL *homeURL = [NSURL URLWithString:@"https://mistar.oakland.k12.mi.us/novi/StudentPortal/Home/PortalMainPage"];
     NSMutableURLRequest *requestHome = [[NSMutableURLRequest alloc] initWithURL:homeURL];
     [requestHome setHTTPMethod:@"GET"]; // this looks like GET request, not POST
     
-    [NSURLConnection sendAsynchronousRequest:requestHome queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *homeResponse, NSData *homeData, NSError *homeError)
-     {
+    [NSURLConnection sendAsynchronousRequest:requestHome queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *homeResponse, NSData *homeData, NSError *homeError) {
          // do whatever with the data...and errors
          if ([homeData length] > 0 && homeError == nil) {
              NSError *parseError;
@@ -92,20 +92,30 @@
              if (responseJSON) {
                  // the response was JSON and we successfully decoded it
                  
-                 NSLog(@"Response was = %@", responseJSON);
+                 //NSLog(@"Response was = %@", responseJSON);
              } else {
                  // the response was not JSON, so let's see what it was so we can diagnose the issue
                  
-                 NSString *homePage = [[NSString alloc] initWithData:homeData encoding:NSUTF8StringEncoding];
-                 NSLog(@"Response was not JSON (from home), it was = %@", homePage);
-                 return homePage;
+                 returnString = (@"Response was not JSON (from home), it was = %@", [[NSMutableString alloc] initWithData:homeData encoding:NSUTF8StringEncoding]);
+                 //NSLog(returnString);
              }
          }
          else {
-             NSLog(@"error: %@", homeError);
+             //NSLog(@"error: %@", homeError);
          }
-         return [NSString stringWithFormat:@"%@", homeData];
-     }];
+        handler(returnString);
+    }];
+    //NSLog(@"myResult: %@", [[NSString alloc] initWithData:myResult encoding:NSUTF8StringEncoding]);
+}
+
+- (NSString *)getUserID {
+    __block NSMutableString *returner = [[NSMutableString alloc] init];
+    [TClient downloadUserID:^(NSString *getIt){
+        //NSLog(getIt);
+        returner = [NSMutableString stringWithFormat:@"%@", getIt];
+    }];
+    NSLog(@"inside %@", returner);
+    return [NSString stringWithString:returner];
 }
 
 

@@ -18,8 +18,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    TClient *client = [[TClient alloc] init];
-    [client print];
     
     TParse *parser = [[TParse alloc] init];
     
