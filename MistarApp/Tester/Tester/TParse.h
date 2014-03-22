@@ -12,7 +12,8 @@
 
 @interface TParse : NSObject
 
-- (NSString *)userIDRegex:(NSData *)data;
+- (NSString *)onlyNumbersRegex:(NSString *)string;
+- (NSString *)userIDRegex:(NSString *)string;
 - (void)parseForUserID;
 
 @end

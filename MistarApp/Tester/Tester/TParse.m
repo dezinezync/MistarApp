@@ -11,10 +11,40 @@
 
 @implementation TParse
 
-
-- (NSString *)userIDRegex:(NSData *)data {
+- (NSString *)onlyNumbersRegex:(NSString *)string {
+    NSString *regexStr = @"\\d\\d\\d\\d\\d\\d\\d\\d";
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:0 error:&error];
     
-    NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    __block NSString *myResult = nil; //Instanciate returner
+    
+    //Enumerate all matches
+    if ((regex==nil) && (error!=nil)){
+        return [NSString stringWithFormat:@"Regex failed for url: %@, error was: %@", string, error];
+    } else {
+        [regex enumerateMatchesInString:string
+                                options:0
+                                  range:NSMakeRange(0, [string length])
+                             usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop){
+                                 if (result!=nil){
+                                     //Iterate ranges
+                                     for (int i=0; i<[result numberOfRanges]; i++) {
+                                         NSRange range = [result rangeAtIndex:i];
+                                         //NSLog(@"%ld,%ld group #%d %@", range.location, range.length, i, (range.length==0 ? @"--" : [string substringWithRange:range]));
+                                         myResult = [string substringWithRange:range];
+                                         *stop = YES;
+                                     }
+                                 } else {
+                                     myResult = @"Regex failed";
+                                     *stop = YES;
+                                 }
+                             }];
+    }
+    return myResult;
+}
+
+
+- (NSString *)userIDRegex:(NSString *)string {
     
     //Create a regular expression
     NSString *regexStr = @"tr id=\"[0-9]*\"";
@@ -35,7 +65,7 @@
             //Iterate ranges
                 for (int i=0; i<[result numberOfRanges]; i++) {
                     NSRange range = [result rangeAtIndex:i];
-                    NSLog(@"%ld,%ld group #%d %@", range.location, range.length, i, (range.length==0 ? @"--" : [string substringWithRange:range]));
+                    //NSLog(@"%ld,%ld group #%d %@", range.location, range.length, i, (range.length==0 ? @"--" : [string substringWithRange:range]));
                     myResult = [string substringWithRange:range];
                     *stop = YES;
                 }
@@ -53,14 +83,17 @@
     //Get the Data you need to parse for (i.e. user main page returned as a block of NSData.
     TClient *client = [[TClient alloc] init];
     [client loginToMistarWithPin:@"20014204" password:@"yuiop" success:^{
-        NSLog([NSString stringWithFormat:@"eyyy %@", [client getUserID]]);
+        [client getUserID:^(NSString *result) {
+            NSString *userIDWithHTML = [self userIDRegex:result];
+            NSString *userID = [self onlyNumbersRegex:userIDWithHTML];
+            
+            //if userID exists, send it to another method in a different class
+            
+        }];
     } failure:^{
         NSLog(@"login failed from controller");
     }];
-    
 }
-
-
 
 
 

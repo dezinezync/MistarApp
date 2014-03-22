@@ -108,16 +108,25 @@
     //NSLog(@"myResult: %@", [[NSString alloc] initWithData:myResult encoding:NSUTF8StringEncoding]);
 }
 
-- (NSString *)getUserID {
-    __block NSMutableString *returner = [[NSMutableString alloc] init];
+- (void)getUserID:(void(^)(NSString *result))handler {
+    
+    
+    
     [TClient downloadUserID:^(NSString *getIt){
         //NSLog(getIt);
-        returner = [NSMutableString stringWithFormat:@"%@", getIt];
+        NSMutableString *returnString = [NSMutableString stringWithFormat:@"%@", getIt];
+        if (handler){
+            handler(returnString);
+        }
     }];
-    NSLog(@"inside %@", returner);
-    return [NSString stringWithString:returner];
 }
 
+
+- (NSDictionary *)getUserData:(NSString *)userID {
+    NSURL *gradeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://mistar.oakland.k12.mi.us/novi/StudentPortal/StudentBanner/SetStudentBanner/%@", userID]]; //this is the URL to the page where the grades are
+    
+    
+}
 
 
 

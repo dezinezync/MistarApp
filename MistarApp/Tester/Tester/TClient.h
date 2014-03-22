@@ -14,6 +14,8 @@
 - (NSString *)percentEscapeString:(NSString *)string;
 - (void)loginToMistarWithPin:(NSString *)pin password:(NSString *)password success:(void (^)(void))successHandler failure:(void (^)(void))failureHandler;
 + (void)downloadUserID:(void(^)(NSString *result))handler;
-- (NSString *)getUserID;
+- (void)getUserID:(void(^)(NSString *result))handler;
+
+@property NSString *userID;
 
 @end
