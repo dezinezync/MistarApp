@@ -28,25 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.screenHeight = [UIScreen mainScreen].bounds.size.height;
-    
-    //if(!userloggedin) do all the setup for grades
-    self.tableView = [[UITableView alloc] init];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorColor = [UIColor grayColor];
-    self.tableView.pagingEnabled = YES;
-    [self.view addSubview:self.tableView];
-    
-    CGRect headerFrame = [UIScreen mainScreen].bounds;
-    CGFloat inset = 20;
-    
-    UIView *header = [[UIView alloc] initWithFrame:headerFrame];
-    header.backgroundColor = [UIColor clearColor];
-    self.tableView.tableHeaderView = header;
-    
-    //else do all the setup for login window
-    
+
+    super.
 }
 
 
