@@ -128,59 +128,72 @@
     
     NSURL *gradeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://mistar.oakland.k12.mi.us/novi/StudentPortal/StudentBanner/SetStudentBanner/%@", userID]]; //this is the URL to the page where the grades are
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:gradeURL];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDownloadTask *downloadGradePage = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-        NSURL *documentsDirectoryURL = [NSURL fileURLWithPath:documentsPath];
-        NSLog([NSString stringWithFormat:@"from session: %@",[[documentsDirectoryURL URLByAppendingPathComponent:[[response URL] lastPathComponent]] absoluteString]]);
-    
-    }];
-    [downloadGradePage resume];
-    
-    
-    
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:gradeURL];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:gradeURL];
 //    
-//    [request setHTTPMethod:@"POST"];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDownloadTask *downloadGradePage = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+//        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+//        NSURL *documentsDirectoryURL = [NSURL fileURLWithPath:documentsPath];
+//        NSLog([NSString stringWithFormat:@"from session: %@",[[documentsDirectoryURL URLByAppendingPathComponent:[[response URL] lastPathComponent]] absoluteString]]);
 //    
-//    NSString *postString = [NSString stringWithFormat:@"chk_Assignments=1"];
-//    
-//    NSData *postBody = [postString dataUsingEncoding:NSUTF8StringEncoding];
-//    
-//    [request setHTTPBody:postBody];
-//    
-//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//        if ([data length] > 0 && error == nil) {
-//            NSError *parseError;
-//            NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-//            if (responseJSON) {
-//                // the response was JSON and we successfully decoded it
-//                
-//                NSLog(@"Response was = %@", responseJSON);
-//                
-//                // assuming you validated that everything was successful, call the success block
-//                
-//                if (successHandler)
-//                    successHandler();
-//            } else {
-//                // the response was not JSON, so let's see what it was so we can diagnose the issue
-//                
-//                NSString *loggedInPage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//                NSLog(@"Response was not JSON (no shit, it was HTML (from login)), it was = %@", loggedInPage);
-//                
-//                if (failureHandler)
-//                    failureHandler();
-//            }
-//        }
-//        else {
-//            NSLog(@"error: %@", error);
-//            
-//            if (failureHandler)
-//                failureHandler();
-//        }
 //    }];
+//    [downloadGradePage resume];
+//    
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:gradeURL];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *postString = [NSString stringWithFormat:@"chk_Assignments.checked=\"checked\""];
+    
+    NSData *postBody = [postString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [request setHTTPBody:postBody];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if ([data length] > 0 && error == nil) {
+            NSError *parseError;
+            NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            if (responseJSON) {
+                // the response was JSON and we successfully decoded it
+                
+                NSLog(@"Response was = %@", responseJSON);
+                
+                // assuming you validated that everything was successful, call the success block
+                
+                if (successHandler)
+                    successHandler();
+            } else {
+                // the response was not JSON, so let's see what it was so we can diagnose the issue
+                
+                NSString *loggedInPage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"Response was not JSON (no shit, it was HTML (from login)), it was = %@", loggedInPage);
+                
+                if (failureHandler)
+                    failureHandler();
+            }
+        }
+        else {
+            NSLog(@"error: %@", error);
+            
+            if (failureHandler)
+                failureHandler();
+        }
+    }];
+}
+
+- (void)downloadFromWebView:(NSString *)userID viewController:(UIViewController *)viewController {
+    
+    NSURL *gradeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://mistar.oakland.k12.mi.us/novi/StudentPortal/StudentBanner/SetStudentBanner/%@", userID]]; //this is the URL to the page where the grades are
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:gradeURL];
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:viewController.view.frame];
+    
+    [webView loadRequest:request];
+    
+    
 }
 
 

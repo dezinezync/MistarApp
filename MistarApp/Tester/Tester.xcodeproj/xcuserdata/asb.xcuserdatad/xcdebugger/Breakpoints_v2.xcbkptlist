@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tester/TParse.h"
-            timestampString = "417207014.276011"
+            timestampString = "417251847.281372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "@interface TParse"
             landmarkType = "2">
          </BreakpointContent>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tester/TParse.m"
-            timestampString = "417228116.039039"
+            timestampString = "417253723.225321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-parseForUserID"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-parseForUserID:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

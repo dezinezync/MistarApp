@@ -27,6 +27,8 @@
 		46E1A5FC18DC9EFA00ADDE1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1A5DE18DC9EFA00ADDE1E /* UIKit.framework */; };
 		46E1A60418DC9EFA00ADDE1E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46E1A60218DC9EFA00ADDE1E /* InfoPlist.strings */; };
 		46E1A60618DC9EFA00ADDE1E /* TesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1A60518DC9EFA00ADDE1E /* TesterTests.m */; };
+		46F201EB18DEC41A009177DF /* RNCachingURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 46F201E818DEC41A009177DF /* RNCachingURLProtocol.m */; };
+		46F201EC18DEC41A009177DF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 46F201E918DEC41A009177DF /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,10 @@
 		46E1A60118DC9EFA00ADDE1E /* TesterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterTests-Info.plist"; sourceTree = "<group>"; };
 		46E1A60318DC9EFA00ADDE1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		46E1A60518DC9EFA00ADDE1E /* TesterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TesterTests.m; sourceTree = "<group>"; };
+		46F201E718DEC41A009177DF /* RNCachingURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCachingURLProtocol.h; sourceTree = "<group>"; };
+		46F201E818DEC41A009177DF /* RNCachingURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCachingURLProtocol.m; sourceTree = "<group>"; };
+		46F201E918DEC41A009177DF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		46F201EA18DEC41A009177DF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,10 @@
 		46E1A5CE18DC9EFA00ADDE1E = {
 			isa = PBXGroup;
 			children = (
+				46F201E718DEC41A009177DF /* RNCachingURLProtocol.h */,
+				46F201E818DEC41A009177DF /* RNCachingURLProtocol.m */,
+				46F201E918DEC41A009177DF /* Reachability.m */,
+				46F201EA18DEC41A009177DF /* Reachability.h */,
 				4682D07218DD5CFB008B97CB /* hpple */,
 				46E1A5E018DC9EFA00ADDE1E /* Tester */,
 				46E1A5FF18DC9EFA00ADDE1E /* TesterTests */,
@@ -354,7 +364,9 @@
 				4682D07B18DD5D26008B97CB /* XPathQuery.m in Sources */,
 				4682D0B718DD5E51008B97CB /* TParse.m in Sources */,
 				4682D07918DD5D26008B97CB /* TFHpple.m in Sources */,
+				46F201EC18DEC41A009177DF /* Reachability.m in Sources */,
 				46E1A5E718DC9EFA00ADDE1E /* main.m in Sources */,
+				46F201EB18DEC41A009177DF /* RNCachingURLProtocol.m in Sources */,
 				4658BD3C18DCA01800BA1F66 /* TClient.m in Sources */,
 				4658BD3B18DCA01800BA1F66 /* TAppDelegate.m in Sources */,
 				4658BD3D18DCA01800BA1F66 /* TViewController.m in Sources */,

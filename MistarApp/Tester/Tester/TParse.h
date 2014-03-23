@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "TClient.h"
+#import "TViewController.h"
 
 
 @interface TParse : NSObject
 
 - (NSString *)onlyNumbersRegex:(NSString *)string;
 - (NSString *)userIDRegex:(NSString *)string;
-- (void)parseForUserID;
+- (void)parseForUserID:(NSString *)noString success:(void (^)(void))successHandler failure:(void (^)(void))failureHandler;
 
 @end

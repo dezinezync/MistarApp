@@ -18,10 +18,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"From viewDiDLoad");
     
-    TParse *parser = [[TParse alloc] init];
-    
-    [parser parseForUserID];
     
     
     

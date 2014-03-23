@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "TClient.h"
+#import "TParse.h"
+#import "RNCachingURLProtocol.h"
+
 
 @interface TAppDelegate : UIResponder <UIApplicationDelegate>
 

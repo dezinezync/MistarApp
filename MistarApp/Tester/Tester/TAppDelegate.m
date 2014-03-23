@@ -14,7 +14,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];
+    NSLog(@"registered");
+    
+    TParse *parser = [[TParse alloc] init];
+    
+    [parser parseForUserID:@"" success:^{
+        
+        TClient *client = [[TClient alloc] init];
+        TViewController *viewController = [[TViewController alloc] init];
+        [client downloadFromWebView:@"2014812" viewController:viewController];
+        
+    } failure:^{
+        NSLog(@"Failed from App Delegte");
+    }];
     return YES;
+    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -79,7 +79,7 @@
 }
 
 
-- (void)parseForUserID {
+- (void)parseForUserID:(NSString *)noString success:(void (^)(void))successHandler failure:(void (^)(void))failureHandler {
     //Get the Data you need to parse for (i.e. user main page returned as a block of NSData.
     TClient *client = [[TClient alloc] init];
     [client loginToMistarWithPin:@"20014204" password:@"yuiop" success:^{
@@ -88,11 +88,12 @@
             NSString *userID = [self onlyNumbersRegex:userIDWithHTML];
             NSLog(@"UserID parsed from HTML");
             
-            [client getUserData:userID success:^{
-                
-            }failure:^{
-                
-            }];
+//            [client getUserData:userID success:^{
+//                
+//                
+//            }failure:^{
+//                
+//            }];
             
         }];
     } failure:^{
