@@ -86,6 +86,7 @@
         [client getUserID:^(NSString *result) {
             NSString *userIDWithHTML = [self userIDRegex:result];
             NSString *userID = [self onlyNumbersRegex:userIDWithHTML];
+            NSLog(@"UserID parsed from HTML");
             
             [client getUserData:userID success:^{
                 
