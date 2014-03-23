@@ -87,7 +87,11 @@
             NSString *userIDWithHTML = [self userIDRegex:result];
             NSString *userID = [self onlyNumbersRegex:userIDWithHTML];
             
-            //if userID exists, send it to another method in a different class
+            [client getUserData:userID success:^{
+                
+            }failure:^{
+                
+            }];
             
         }];
     } failure:^{

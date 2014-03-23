@@ -40,8 +40,7 @@
     NSData * postBody = [postString dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:postBody];
     
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
          // do whatever with the data...and errors
          if ([data length] > 0 && error == nil) {
              NSError *parseError;
@@ -122,10 +121,50 @@
 }
 
 
-- (NSDictionary *)getUserData:(NSString *)userID {
+- (void)getUserData:(NSString *)userID success:(void (^)(void))successHandler failure:(void (^)(void))failureHandler {
+    
     NSURL *gradeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://mistar.oakland.k12.mi.us/novi/StudentPortal/StudentBanner/SetStudentBanner/%@", userID]]; //this is the URL to the page where the grades are
     
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:gradeURL];
     
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *postString = [NSString stringWithFormat:@"chk_Assignments=1"];
+    
+    NSData *postBody = [postString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [request setHTTPBody:postBody];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if ([data length] > 0 && error == nil) {
+            NSError *parseError;
+            NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            if (responseJSON) {
+                // the response was JSON and we successfully decoded it
+                
+                NSLog(@"Response was = %@", responseJSON);
+                
+                // assuming you validated that everything was successful, call the success block
+                
+                if (successHandler)
+                    successHandler();
+            } else {
+                // the response was not JSON, so let's see what it was so we can diagnose the issue
+                
+                NSString *loggedInPage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"Response was not JSON (from login), it was = %@", loggedInPage);
+                
+                if (failureHandler)
+                    failureHandler();
+            }
+        }
+        else {
+            NSLog(@"error: %@", error);
+            
+            if (failureHandler)
+                failureHandler();
+        }
+    }];
 }
 
 
