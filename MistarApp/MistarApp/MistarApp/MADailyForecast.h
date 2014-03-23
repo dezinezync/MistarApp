@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Andrew Breckenridge. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MACondition.h"
 
-@interface MADailyForecast : NSCondition
+@interface MADailyForecast : MACondition
 
 @end

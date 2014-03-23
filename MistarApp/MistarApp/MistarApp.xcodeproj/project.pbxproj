@@ -194,9 +194,9 @@
 				46A6176718DF5000001400BC /* MAController.h */,
 				46A6176818DF5000001400BC /* MAController.m */,
 				46A6176A18DF5015001400BC /* MADailyForecast.h */,
+				46A6176B18DF5015001400BC /* MADailyForecast.m */,
 				46A6176D18DF5038001400BC /* MAManager.h */,
 				46A6176E18DF5038001400BC /* MAManager.m */,
-				46A6176B18DF5015001400BC /* MADailyForecast.m */,
 			);
 			path = MistarApp;
 			sourceTree = "<group>";
