@@ -50,6 +50,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UITapGestureRecognizer *screenTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    screenTapped.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:screenTapped];
+    
     // Store screenHeight for later layout
     self.screenHeight = [UIScreen mainScreen].bounds.size.height;
     
@@ -154,28 +158,30 @@
     mistarLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
     [header addSubview:mistarLabel];
     
-    UITextField *loginField = [[UITextField alloc] initWithFrame:mistarFrame];
-    loginField.backgroundColor = [UIColor clearColor];
-    loginField.textColor = [UIColor whiteColor];
-    loginField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-    loginField.borderStyle = UITextBorderStyleNone;
-    loginField.autocorrectionType = UITextAutocorrectionTypeNo;
-    loginField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    loginField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    loginField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Student ID" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [header addSubview:loginField];
+    _loginField = [[UITextField alloc] initWithFrame:mistarFrame];
+    _loginField.delegate = self;
+    _loginField.backgroundColor = [UIColor clearColor];
+    _loginField.textColor = [UIColor whiteColor];
+    _loginField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+    _loginField.borderStyle = UITextBorderStyleNone;
+    _loginField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _loginField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    _loginField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _loginField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Student ID" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [header addSubview:_loginField];
     
-    UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(mistarFrame.origin.x, (mistarFrame.origin.y + iconHeight), mistarFrame.size.width, mistarFrame.size.height)];
-    passwordField.backgroundColor = [UIColor clearColor];
-    passwordField.textColor = [UIColor whiteColor];
-    passwordField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-    passwordField.borderStyle = UITextBorderStyleNone;
-    passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
-    passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    passwordField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    passwordField.secureTextEntry = YES;
-    [header addSubview:passwordField];
+    _passwordField = [[UITextField alloc] initWithFrame:CGRectMake(mistarFrame.origin.x, (mistarFrame.origin.y + iconHeight), mistarFrame.size.width, mistarFrame.size.height)];
+    _passwordField.delegate = self;
+    _passwordField.backgroundColor = [UIColor clearColor];
+    _passwordField.textColor = [UIColor whiteColor];
+    _passwordField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+    _passwordField.borderStyle = UITextBorderStyleNone;
+    _passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    _passwordField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    _passwordField.secureTextEntry = YES;
+    [header addSubview:_passwordField];
     
     
     
@@ -217,12 +223,27 @@
          [self.tableView reloadData];
      }];
     
+    if ([self userEnteredData]) {
+        NSLog(@"treu");
+    }
+    
     [[MAManager sharedManager] findCurrentLocation];
 }
 
 // Make that time *white*
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+
+- (void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
+
+- (BOOL)userEnteredData {
+    if (_loginField.text.length > 0 && _passwordField.text.length > 0) {
+        NSLog(@"Would have submitted passwd");
+        return TRUE;
+    } else return FALSE;
 }
 
 - (void)didReceiveMemoryWarning
@@ -251,9 +272,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
+        return MAX(6,6) + 1; //TODO add getNumberOfClasses for people with 7 or 8 classes
+    } else if (section == 1) {
         return MIN([[MAManager sharedManager].hourlyForecast count], 6) + 1;
+    } else {
+        return MIN([[MAManager sharedManager].dailyForecast count], 6) + 1;
     }
-    return MIN([[MAManager sharedManager].dailyForecast count], 6) + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -276,7 +300,7 @@
         }
         else {
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-            cell.textLabel.text = @"Class Name      A+";
+            cell.textLabel.text = @"Class Name                  A+";
             //TODO get grades and config using method (TB Created)
         }
     }
@@ -338,8 +362,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Determine cell height based on screen
-    return 44;
+    NSInteger cellCount = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    return self.screenHeight / (CGFloat)cellCount;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // 1
+    CGFloat height = scrollView.bounds.size.height;
+    CGFloat position = MAX(scrollView.contentOffset.y, 0.0);
+    // 2
+    CGFloat percent = MIN(position / height, 1.0);
+    // 3
+    self.blurredImageView.alpha = percent;
 }
 
 

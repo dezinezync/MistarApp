@@ -11,4 +11,10 @@
 @interface MAController : UIViewController
 <UITableViewDataSource, UITabBarDelegate, UIScrollViewDelegate>
 
+@property (nonatomic) UITextField *loginField;
+@property (nonatomic) UITextField *passwordField;
+
+- (void)dismissKeyboard;
+- (BOOL)userEnteredData;
+
 @end
