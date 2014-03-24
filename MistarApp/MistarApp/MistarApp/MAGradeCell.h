@@ -20,4 +20,9 @@
 
 @property (nonatomic,strong) UIButton *button; //Use your button's Class there instead of UIButton
 
+typedef void (^yourCallBack)(MAGradeCell *cell);
+
+@property (readwrite, copy) yourCallBack callBack;
+
+
 @end

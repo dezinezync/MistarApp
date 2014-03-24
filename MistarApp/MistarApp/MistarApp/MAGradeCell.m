@@ -18,8 +18,6 @@
 
         CGFloat inset = 20;
         
-        MAController *viewController = [[MAController alloc] init];
-        
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
@@ -27,28 +25,27 @@
         self.detailTextLabel.textColor = [UIColor whiteColor];
         loginButton = nil;
         
-        if (indexPath.section == 0) {
-            // 1
-            if (indexPath.row == 0) {
-                [viewController configureHeaderCell:self title:@"Hourly Forecast"];
-            }
-            else {
-                // 2
-                MACondition *weather = [MAManager sharedManager].hourlyForecast[indexPath.row - 1];
-                [viewController configureHourlyCell:self weather:weather];
-            }
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            // Create button
+            UIView *cellView = self.contentView;
+            CGRect loginButtonFrame = CGRectMake((cellView.frame.size.width - (80 + inset)), 18, 80, (cellView.frame.size.height));
+            loginButton = [[QBFlatButton alloc] initWithFrame:loginButtonFrame];
+            [loginButton addTarget:self action:@selector(loginButtonWasPressed)forControlEvents:UIControlEventTouchUpInside];
+            loginButton.faceColor = [UIColor grayColor];
+            loginButton.sideColor = [UIColor clearColor];
+   
+            loginButton.radius = 6.0;
+            loginButton.margin = 4.0;
+            loginButton.depth = 3.0;
+            loginButton.alpha = 0.3;
+            
+            loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+            [loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [loginButton setTitle:@"Login" forState:UIControlStateNormal];
+            [cellView addSubview:loginButton];
+
         }
-        else if (indexPath.section == 1) {
-            // 1
-            if (indexPath.row == 0) {
-                [viewController configureHeaderCell:self title:@"Daily Forecast"];
-            }
-            else {
-                // 3
-                MACondition *weather = [MAManager sharedManager].dailyForecast[indexPath.row - 1];
-                [viewController configureDailyCell:self weather:weather];
-            }
-        }
+
 
         //Init your button and add it to the cell's contentView as a subview. 
     }
@@ -63,7 +60,19 @@
 {
     self.loginButton = nil;
     loginButton = nil;
+    [loginButton removeFromSuperview];
+    [self removeFromSuperview];
+    [self.loginButton removeFromSuperview];
+    self.textLabel.text = nil;
+    
     [super prepareForReuse];
+}
+
+- (void)someAction {
+    if (self.callBack != nil) {
+        
+        self.callBack(self);
+    }
 }
 
 /*

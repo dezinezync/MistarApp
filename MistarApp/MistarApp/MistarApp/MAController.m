@@ -334,6 +334,10 @@
     }
     return cell;
     
+    cell.callBack = ^(MAGradeCell *gradeCell) {
+        //Do the stuff
+    };
+    
 //    // Sets up attributes of each cell
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone; //TODO none
 //    cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
@@ -341,10 +345,10 @@
 //    cell.detailTextLabel.textColor = [UIColor whiteColor];
     QBFlatButton* loginButton = nil;
     
-//    if (indexPath.section == 0) {
-//        if (indexPath.row == 0) {
-//            [self configureHeaderCell:cell title:@"Grades"];
-//            
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [self configureHeaderCell:cell title:@"Grades"];
+            
 //            if ([cell.textLabel.text isEqual: @"Grades"] && (!loginButton) && (indexPath.row == 0) && (indexPath.section == 0)) {
 //                
 //                UIView *cellView = cell.contentView;
@@ -364,37 +368,38 @@
 //                [loginButton setTitle:@"Login" forState:UIControlStateNormal];
 //                [cellView addSubview:loginButton];
 //            }
-//        } else {
-//            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-//            cell.textLabel.text = [NSString stringWithFormat:@"Period %ld               A+", (long)indexPath.row];
-//            cell.detailTextLabel.text = @"Class name";
-//            //TODO get grades and config using method (TB Created)
-//        }
-//    } else if (indexPath.section == 1) {
-//        if (indexPath.row == 0) {
-//            [self configureHeaderCell:cell title:@"Hourly Forecast"];
-//        }
-//        else {
-//            // Get hourly weather and configure using method
-//            MACondition *weather = [MAManager sharedManager].hourlyForecast[indexPath.row - 1];
-//            [self configureHourlyCell:cell weather:weather];
-//        }
-//    }
-//    else if (indexPath.section == 2) {
-//        if (indexPath.row == 0) {
-//            [self configureHeaderCell:cell title:@"Daily Forecast"];
-//        }
-//        else if (indexPath.section == 2) {
-//            // Get daily weather and configure using method
-//            MACondition *weather = [MAManager sharedManager].dailyForecast[indexPath.row - 1];
-//            [self configureDailyCell:cell weather:weather];
-//        }
-//    }
-    
+        } else {
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            cell.textLabel.text = [NSString stringWithFormat:@"Period %ld               A+", (long)indexPath.row];
+            cell.detailTextLabel.text = @"Class name";
+            //TODO get grades and config using method (TB Created)
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            [self configureHeaderCell:cell title:@"Hourly Forecast"];
+        }
+        else {
+            // Get hourly weather and configure using method
+            MACondition *weather = [MAManager sharedManager].hourlyForecast[indexPath.row - 1];
+            [self configureHourlyCell:cell weather:weather];
+        }
+    }
+    else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            [self configureHeaderCell:cell title:@"Daily Forecast"];
+        }
+        else if (indexPath.section == 2) {
+            // Get daily weather and configure using method
+            MACondition *weather = [MAManager sharedManager].dailyForecast[indexPath.row - 1];
+            [self configureDailyCell:cell weather:weather];
+        }
+    }
+
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
+
 
 - (void)configureHeaderCell:(UITableViewCell *)cell title:(NSString *)title {
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
