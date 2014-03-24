@@ -10,16 +10,38 @@
 #import "MAController.h"
 #import <TSMessage.h>
 
+
+
 @implementation MAAppDelegate
+@synthesize navController;
+@synthesize detailViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
+    // Init the navController for the Master Detail View of the grade cells
+    
+    UINavigationController *navController = [[UINavigationController alloc] init];
+    
+    
+    detailViewController = [[UIViewController alloc] init]; //step6
+    navController = [[UINavigationController alloc] initWithRootViewController:[[MAController alloc] init]]; //step7
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = navController; //step8
+    [self.window makeKeyAndVisible];
+    
+    
     // Set MAController as rootViewController
-    self.window.rootViewController = [[MAController alloc] init];
+    //self.window.rootViewController = [[MAController alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
+    
     
     // Use the insanely cool TSMessages to show network alerts
     [TSMessage setDefaultViewController: self.window.rootViewController];

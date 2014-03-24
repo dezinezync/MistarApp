@@ -12,4 +12,11 @@
 
 @implementation MAGradeClient
 
+- (BOOL)provideLoginWithPin:(NSString *)pin password:(NSString *)password {
+    NSLog([NSString stringWithFormat:@"Got these details %@ & %@", pin, password]);
+    return true;
+}
+
+
+
 @end

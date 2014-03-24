@@ -30,6 +30,12 @@
 #define COCOAPODS_VERSION_MINOR_Mantle_extobjc 4
 #define COCOAPODS_VERSION_PATCH_Mantle_extobjc 1
 
+// QBFlatButton
+#define COCOAPODS_POD_AVAILABLE_QBFlatButton
+#define COCOAPODS_VERSION_MAJOR_QBFlatButton 1
+#define COCOAPODS_VERSION_MINOR_QBFlatButton 0
+#define COCOAPODS_VERSION_PATCH_QBFlatButton 0
+
 // ReactiveCocoa
 #define COCOAPODS_POD_AVAILABLE_ReactiveCocoa
 #define COCOAPODS_VERSION_MAJOR_ReactiveCocoa 2

@@ -53,6 +53,7 @@
 		46A6176F18DF5038001400BC /* MAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6176E18DF5038001400BC /* MAManager.m */; };
 		46A6177418DF809A001400BC /* MAGradeClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6177318DF809A001400BC /* MAGradeClient.m */; };
 		46A6177718DF80BC001400BC /* MAGradeReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6177618DF80BC001400BC /* MAGradeReport.m */; };
+		46EBF04918E014C800F3CD75 /* MAGradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EBF04818E014C800F3CD75 /* MAGradeCell.m */; };
 		B0504526486447ECB2D3DED4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D87429006843B089F31F48 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,8 @@
 		46A6177318DF809A001400BC /* MAGradeClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGradeClient.m; sourceTree = "<group>"; };
 		46A6177518DF80BC001400BC /* MAGradeReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAGradeReport.h; sourceTree = "<group>"; };
 		46A6177618DF80BC001400BC /* MAGradeReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGradeReport.m; sourceTree = "<group>"; };
+		46EBF04718E014C800F3CD75 /* MAGradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAGradeCell.h; sourceTree = "<group>"; };
+		46EBF04818E014C800F3CD75 /* MAGradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGradeCell.m; sourceTree = "<group>"; };
 		52D87429006843B089F31F48 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DAFCE29A7A4474B90B9DC48 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,6 +297,8 @@
 				46A6177318DF809A001400BC /* MAGradeClient.m */,
 				46A6177518DF80BC001400BC /* MAGradeReport.h */,
 				46A6177618DF80BC001400BC /* MAGradeReport.m */,
+				46EBF04718E014C800F3CD75 /* MAGradeCell.h */,
+				46EBF04818E014C800F3CD75 /* MAGradeCell.m */,
 			);
 			name = Grades;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				4669585F18DF4D7900A72F85 /* main.m in Sources */,
 				46A6176C18DF5015001400BC /* MADailyForecast.m in Sources */,
 				46A6176318DF4F8E001400BC /* MAClient.m in Sources */,
+				46EBF04918E014C800F3CD75 /* MAGradeCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

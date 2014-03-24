@@ -10,4 +10,6 @@
 
 @interface MAGradeClient : NSObject
 
+- (BOOL)provideLoginWithPin:(NSString *)pin password:(NSString *)password;
+
 @end

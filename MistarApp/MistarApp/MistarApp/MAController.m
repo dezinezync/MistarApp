@@ -50,9 +50,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UITapGestureRecognizer *screenTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    screenTapped.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:screenTapped];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    //[super ];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    tap.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap];
     
     // Store screenHeight for later layout
     self.screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -86,7 +89,7 @@
     CGFloat temperatureHeight = 110;
     CGFloat hiloHeight = 40;
     CGFloat iconHeight = 30;
-    CGFloat mistarHeight = 100;
+//    CGFloat mistarHeight = 100;
     
     CGRect hiloFrame = CGRectMake(inset,
                                   headerFrame.size.height - hiloHeight,
@@ -103,10 +106,10 @@
                                   iconHeight,
                                   iconHeight);
 
-    CGRect mistarFrame = CGRectMake((inset / 2),
-                                    220,
-                                    (self.view.bounds.size.width - (4 * inset)),
-                                    mistarHeight);
+//    CGRect mistarFrame = CGRectMake((inset / 2),
+//                                    220,
+//                                    (self.view.bounds.size.width - (4 * inset)),
+//                                    mistarHeight);
 
     
     CGRect conditionsFrame = iconFrame;
@@ -151,37 +154,37 @@
     [header addSubview:conditionsLabel];
     
     // Add Mistar login fields
-    UILabel *mistarLabel = [[UILabel alloc] initWithFrame:CGRectMake(mistarFrame.origin.x, (mistarFrame.origin.y - (iconHeight + 5)), mistarFrame.size.width, mistarFrame.size.height)];
-    mistarLabel.backgroundColor = [UIColor clearColor];
-    mistarLabel.textColor = [UIColor whiteColor];
-    mistarLabel.text = @"Login To Zangle";
-    mistarLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
-    [header addSubview:mistarLabel];
-    
-    _loginField = [[UITextField alloc] initWithFrame:mistarFrame];
-    _loginField.delegate = self;
-    _loginField.backgroundColor = [UIColor clearColor];
-    _loginField.textColor = [UIColor whiteColor];
-    _loginField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-    _loginField.borderStyle = UITextBorderStyleNone;
-    _loginField.autocorrectionType = UITextAutocorrectionTypeNo;
-    _loginField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    _loginField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _loginField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Student ID" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [header addSubview:_loginField];
-    
-    _passwordField = [[UITextField alloc] initWithFrame:CGRectMake(mistarFrame.origin.x, (mistarFrame.origin.y + iconHeight), mistarFrame.size.width, mistarFrame.size.height)];
-    _passwordField.delegate = self;
-    _passwordField.backgroundColor = [UIColor clearColor];
-    _passwordField.textColor = [UIColor whiteColor];
-    _passwordField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-    _passwordField.borderStyle = UITextBorderStyleNone;
-    _passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
-    _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    _passwordField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    _passwordField.secureTextEntry = YES;
-    [header addSubview:_passwordField];
+//    UILabel *mistarLabel = [[UILabel alloc] initWithFrame:CGRectMake(mistarFrame.origin.x, (mistarFrame.origin.y - (iconHeight + 5)), mistarFrame.size.width, mistarFrame.size.height)];
+//    mistarLabel.backgroundColor = [UIColor clearColor];
+//    mistarLabel.textColor = [UIColor whiteColor];
+//    mistarLabel.text = @"Login To Zangle";
+//    mistarLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
+//    [header addSubview:mistarLabel];
+//    
+//    _loginField = [[UITextField alloc] initWithFrame:mistarFrame];
+//    _loginField.delegate = self;
+//    _loginField.backgroundColor = [UIColor clearColor];
+//    _loginField.textColor = [UIColor whiteColor];
+//    _loginField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+//    _loginField.borderStyle = UITextBorderStyleNone;
+//    _loginField.autocorrectionType = UITextAutocorrectionTypeNo;
+//    _loginField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    _loginField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+//    _loginField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Student ID" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+//    [header addSubview:_loginField];
+//    
+//    _passwordField = [[UITextField alloc] initWithFrame:CGRectMake(mistarFrame.origin.x, (mistarFrame.origin.y + iconHeight), mistarFrame.size.width, mistarFrame.size.height)];
+//    _passwordField.delegate = self;
+//    _passwordField.backgroundColor = [UIColor clearColor];
+//    _passwordField.textColor = [UIColor whiteColor];
+//    _passwordField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+//    _passwordField.borderStyle = UITextBorderStyleNone;
+//    _passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+//    _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    _passwordField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+//    _passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+//    _passwordField.secureTextEntry = YES;
+//    [header addSubview:_passwordField];
     
     
     
@@ -222,11 +225,6 @@
      subscribeNext:^(NSArray *newForecast) {
          [self.tableView reloadData];
      }];
-    
-    if ([self userEnteredData]) {
-        NSLog(@"treu");
-    }
-    
     [[MAManager sharedManager] findCurrentLocation];
 }
 
@@ -239,12 +237,54 @@
     [self.view endEditing:YES];
 }
 
-- (BOOL)userEnteredData {
-    if (_loginField.text.length > 0 && _passwordField.text.length > 0) {
-        NSLog(@"Would have submitted passwd");
-        return TRUE;
-    } else return FALSE;
+- (void)loginButtonWasPressed {
+    NSLog(@"Login UIAlert triggered");
+    //UI Alert
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login To Zangle"
+                                                    message:@"Enter your Zangle information"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Continue", nil];
+    
+    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    UITextField *pinTextField = [alert textFieldAtIndex:0];
+    UITextField *passwordTextField = [alert textFieldAtIndex:1];
+    pinTextField.keyboardType = UIKeyboardTypeNumberPad;
+    pinTextField.placeholder = @"Student ID";
+    passwordTextField.placeholder = @"Password";
+    
+    [alert show];
+    
+};
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+    MAGradeClient *gradeClient = [[MAGradeClient alloc] init];
+    
+    
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"Cancel"])
+    {
+        NSLog(@"Client canceled");
+    }
+    else if([title isEqualToString:@"Continue"])
+    {
+        NSString *userPin = [alertView textFieldAtIndex:0].text;
+        NSString *userPassword = [alertView textFieldAtIndex:1].text;
+        NSLog([NSString stringWithFormat:@"Client is: %@ with credential: %@", userPin, userPassword]);
+        
+        [gradeClient provideLoginWithPin:userPin password:userPassword];
+        
+    }
 }
+
+//- (BOOL)userEnteredData {
+//    if (_loginField.text.length > 0 && _passwordField.text.length > 0) {
+//        NSLog(@"Would have submitted passwd");
+//        return TRUE;
+//    } else return FALSE;
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -284,6 +324,10 @@
     static NSString *CellIdentifier = @"CellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    // Redefine layout variables in method from `viewDidLoad`
+    CGFloat inset = 20; // For padding
+    
+    
     if (! cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
@@ -293,18 +337,38 @@
     cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor whiteColor];
+    QBFlatButton* loginButton = nil;
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [self configureHeaderCell:cell title:@"Grades"];
-        }
-        else {
+            
+            if ([cell.textLabel.text isEqual: @"Grades"] && (!loginButton) && (indexPath.row == 0) && (indexPath.section == 0)) {
+                
+                UIView *cellView = cell.contentView;
+                CGRect loginButtonFrame = CGRectMake((cellView.frame.size.width - (80 + inset)), 18, 80, (cellView.frame.size.height));
+                loginButton = [[QBFlatButton alloc] initWithFrame:loginButtonFrame];
+                [loginButton addTarget:self action:@selector(loginButtonWasPressed)forControlEvents:UIControlEventTouchUpInside];
+                loginButton.faceColor = [UIColor grayColor];
+                loginButton.sideColor = [UIColor clearColor];
+                
+                loginButton.radius = 6.0;
+                loginButton.margin = 4.0;
+                loginButton.depth = 3.0;
+                loginButton.alpha = 0.3;
+                
+                loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+                [loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [loginButton setTitle:@"Login" forState:UIControlStateNormal];
+                [cellView addSubview:loginButton];
+            }
+        } else {
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-            cell.textLabel.text = @"Class Name                  A+";
+            cell.textLabel.text = [NSString stringWithFormat:@"Period %ld               A+", (long)indexPath.row];
+            cell.detailTextLabel.text = @"Class name";
             //TODO get grades and config using method (TB Created)
         }
-    }
-    else if (indexPath.section == 1) {
+    } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             [self configureHeaderCell:cell title:@"Hourly Forecast"];
         }
@@ -318,7 +382,7 @@
         if (indexPath.row == 0) {
             [self configureHeaderCell:cell title:@"Daily Forecast"];
         }
-        else {
+        else if (indexPath.section == 2) {
             // Get daily weather and configure using method
             MACondition *weather = [MAManager sharedManager].dailyForecast[indexPath.row - 1];
             [self configureDailyCell:cell weather:weather];
