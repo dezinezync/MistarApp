@@ -16,12 +16,20 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        
+        //Init your button and add it to the cell's contentView as a subview. 
     }
     return self;
 }
 
 -(void)layoutSubviews{
     [super layoutSubviews];
+}
+
+- (void)prepareForReuse
+{
+    self.button = nil;
+    [super prepareForReuse];
 }
 
 /*
