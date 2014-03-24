@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Andrew Breckenridge. All rights reserved.
 //
 
-#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "MAController.h"
-#import "MAManager.h"
+#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 @interface MAController ()
 
@@ -51,7 +50,6 @@
     // Do any additional setup after loading the view.
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    //[super ];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     tap.cancelsTouchesInView = NO;
@@ -311,83 +309,87 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 12) {
         return MAX(6,6) + 1; //TODO add getNumberOfClasses for people with 7 or 8 classes
-    } else if (section == 1) {
+    } else if (section == 0) {
         return MIN([[MAManager sharedManager].hourlyForecast count], 6) + 1;
     } else {
         return MIN([[MAManager sharedManager].dailyForecast count], 6) + 1;
     }
+
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (MAGradeCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CellIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MAGradeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Redefine layout variables in method from `viewDidLoad`
+    
+//    // Redefine layout variables in method from `viewDidLoad`
     CGFloat inset = 20; // For padding
     
     
     if (! cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[MAGradeCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier cellForRowAtIndexPath:indexPath];
     }
+    return cell;
     
-    // Sets up attributes of each cell
-    cell.selectionStyle = UITableViewCellSelectionStyleNone; //TODO none
-    cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
+//    // Sets up attributes of each cell
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone; //TODO none
+//    cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+//    cell.textLabel.textColor = [UIColor whiteColor];
+//    cell.detailTextLabel.textColor = [UIColor whiteColor];
     QBFlatButton* loginButton = nil;
     
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            [self configureHeaderCell:cell title:@"Grades"];
-            
-            if ([cell.textLabel.text isEqual: @"Grades"] && (!loginButton) && (indexPath.row == 0) && (indexPath.section == 0)) {
-                
-                UIView *cellView = cell.contentView;
-                CGRect loginButtonFrame = CGRectMake((cellView.frame.size.width - (80 + inset)), 18, 80, (cellView.frame.size.height));
-                loginButton = [[QBFlatButton alloc] initWithFrame:loginButtonFrame];
-                [loginButton addTarget:self action:@selector(loginButtonWasPressed)forControlEvents:UIControlEventTouchUpInside];
-                loginButton.faceColor = [UIColor grayColor];
-                loginButton.sideColor = [UIColor clearColor];
-                
-                loginButton.radius = 6.0;
-                loginButton.margin = 4.0;
-                loginButton.depth = 3.0;
-                loginButton.alpha = 0.3;
-                
-                loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-                [loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [loginButton setTitle:@"Login" forState:UIControlStateNormal];
-                [cellView addSubview:loginButton];
-            }
-        } else {
-            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-            cell.textLabel.text = [NSString stringWithFormat:@"Period %ld               A+", (long)indexPath.row];
-            cell.detailTextLabel.text = @"Class name";
-            //TODO get grades and config using method (TB Created)
-        }
-    } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            [self configureHeaderCell:cell title:@"Hourly Forecast"];
-        }
-        else {
-            // Get hourly weather and configure using method
-            MACondition *weather = [MAManager sharedManager].hourlyForecast[indexPath.row - 1];
-            [self configureHourlyCell:cell weather:weather];
-        }
-    }
-    else if (indexPath.section == 2) {
-        if (indexPath.row == 0) {
-            [self configureHeaderCell:cell title:@"Daily Forecast"];
-        }
-        else if (indexPath.section == 2) {
-            // Get daily weather and configure using method
-            MACondition *weather = [MAManager sharedManager].dailyForecast[indexPath.row - 1];
-            [self configureDailyCell:cell weather:weather];
-        }
-    }
+//    if (indexPath.section == 0) {
+//        if (indexPath.row == 0) {
+//            [self configureHeaderCell:cell title:@"Grades"];
+//            
+//            if ([cell.textLabel.text isEqual: @"Grades"] && (!loginButton) && (indexPath.row == 0) && (indexPath.section == 0)) {
+//                
+//                UIView *cellView = cell.contentView;
+//                CGRect loginButtonFrame = CGRectMake((cellView.frame.size.width - (80 + inset)), 18, 80, (cellView.frame.size.height));
+//                loginButton = [[QBFlatButton alloc] initWithFrame:loginButtonFrame];
+//                [loginButton addTarget:self action:@selector(loginButtonWasPressed)forControlEvents:UIControlEventTouchUpInside];
+//                loginButton.faceColor = [UIColor grayColor];
+//                loginButton.sideColor = [UIColor clearColor];
+//                
+//                loginButton.radius = 6.0;
+//                loginButton.margin = 4.0;
+//                loginButton.depth = 3.0;
+//                loginButton.alpha = 0.3;
+//                
+//                loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+//                [loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//                [loginButton setTitle:@"Login" forState:UIControlStateNormal];
+//                [cellView addSubview:loginButton];
+//            }
+//        } else {
+//            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+//            cell.textLabel.text = [NSString stringWithFormat:@"Period %ld               A+", (long)indexPath.row];
+//            cell.detailTextLabel.text = @"Class name";
+//            //TODO get grades and config using method (TB Created)
+//        }
+//    } else if (indexPath.section == 1) {
+//        if (indexPath.row == 0) {
+//            [self configureHeaderCell:cell title:@"Hourly Forecast"];
+//        }
+//        else {
+//            // Get hourly weather and configure using method
+//            MACondition *weather = [MAManager sharedManager].hourlyForecast[indexPath.row - 1];
+//            [self configureHourlyCell:cell weather:weather];
+//        }
+//    }
+//    else if (indexPath.section == 2) {
+//        if (indexPath.row == 0) {
+//            [self configureHeaderCell:cell title:@"Daily Forecast"];
+//        }
+//        else if (indexPath.section == 2) {
+//            // Get daily weather and configure using method
+//            MACondition *weather = [MAManager sharedManager].dailyForecast[indexPath.row - 1];
+//            [self configureDailyCell:cell weather:weather];
+//        }
+//    }
     
     return cell;
 }

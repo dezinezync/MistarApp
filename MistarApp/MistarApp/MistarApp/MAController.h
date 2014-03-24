@@ -7,15 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QBFlatButton.h>
 
 #import "MAGradeClient.h"
+#import "MAGradeCell.h"
+#import "MAManager.h"
 
 @interface MAController : UIViewController
 <UITableViewDataSource, UITabBarDelegate, UIScrollViewDelegate>
 
 - (void)dismissKeyboard;
 - (void)loginButtonWasPressed;
+
+
+- (void)configureHeaderCell:(UITableViewCell *)cell title:(NSString *)title;
+- (void)configureHourlyCell:(UITableViewCell *)cell weather:(MACondition *)weather;
+- (void)configureDailyCell:(UITableViewCell *)cell weather:(MACondition *)weather;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
 @end
