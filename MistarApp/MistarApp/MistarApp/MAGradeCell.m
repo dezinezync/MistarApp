@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+
         CGFloat inset = 20;
         
         MAController *viewController = [[MAController alloc] init];
@@ -48,6 +49,7 @@
                 [viewController configureDailyCell:self weather:weather];
             }
         }
+
         //Init your button and add it to the cell's contentView as a subview. 
     }
     return self;
@@ -59,6 +61,7 @@
 
 - (void)prepareForReuse
 {
+    self.loginButton = nil;
     loginButton = nil;
     [super prepareForReuse];
 }
