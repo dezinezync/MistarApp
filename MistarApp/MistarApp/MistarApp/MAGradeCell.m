@@ -24,6 +24,12 @@
     [super layoutSubviews];
 }
 
+- (void)prepareForReuse
+{
+    self.button = nil;
+    [super prepareForReuse];
+}
+
 /*
  - (void)setSelected:(BOOL)selected animated:(BOOL)animated
  {
