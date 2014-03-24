@@ -332,42 +332,38 @@
     if (! cell) {
         cell = [[MAGradeCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier cellForRowAtIndexPath:indexPath];
     }
-    return cell;
     
-    cell.callBack = ^(MAGradeCell *gradeCell) {
-        //Do the stuff
-    };
-    
-//    // Sets up attributes of each cell
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone; //TODO none
-//    cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
-//    cell.textLabel.textColor = [UIColor whiteColor];
-//    cell.detailTextLabel.textColor = [UIColor whiteColor];
+
+    // Sets up attributes of each cell
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     QBFlatButton* loginButton = nil;
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [self configureHeaderCell:cell title:@"Grades"];
             
-//            if ([cell.textLabel.text isEqual: @"Grades"] && (!loginButton) && (indexPath.row == 0) && (indexPath.section == 0)) {
-//                
-//                UIView *cellView = cell.contentView;
-//                CGRect loginButtonFrame = CGRectMake((cellView.frame.size.width - (80 + inset)), 18, 80, (cellView.frame.size.height));
-//                loginButton = [[QBFlatButton alloc] initWithFrame:loginButtonFrame];
-//                [loginButton addTarget:self action:@selector(loginButtonWasPressed)forControlEvents:UIControlEventTouchUpInside];
-//                loginButton.faceColor = [UIColor grayColor];
-//                loginButton.sideColor = [UIColor clearColor];
-//                
-//                loginButton.radius = 6.0;
-//                loginButton.margin = 4.0;
-//                loginButton.depth = 3.0;
-//                loginButton.alpha = 0.3;
-//                
-//                loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-//                [loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//                [loginButton setTitle:@"Login" forState:UIControlStateNormal];
-//                [cellView addSubview:loginButton];
-//            }
+            if ([cell.textLabel.text isEqual: @"Grades"] && (!loginButton) && (indexPath.row == 0) && (indexPath.section == 0)) {
+                
+                UIView *cellView = cell.contentView;
+                CGRect loginButtonFrame = CGRectMake((cellView.frame.size.width - (80 + inset)), 18, 80, (cellView.frame.size.height));
+                loginButton = [[QBFlatButton alloc] initWithFrame:loginButtonFrame];
+                [loginButton addTarget:self action:@selector(loginButtonWasPressed)forControlEvents:UIControlEventTouchUpInside];
+                loginButton.faceColor = [UIColor grayColor];
+                loginButton.sideColor = [UIColor clearColor];
+                
+                loginButton.radius = 6.0;
+                loginButton.margin = 4.0;
+                loginButton.depth = 3.0;
+                loginButton.alpha = 0.3;
+                
+                loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+                [loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [loginButton setTitle:@"Login" forState:UIControlStateNormal];
+                [cellView addSubview:loginButton];
+            }
         } else {
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             cell.textLabel.text = [NSString stringWithFormat:@"Period %ld               A+", (long)indexPath.row];
