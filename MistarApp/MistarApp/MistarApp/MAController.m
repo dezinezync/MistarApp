@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Andrew Breckenridge. All rights reserved.
 //
 
-#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "MAController.h"
-#import "MAManager.h"
+#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 @interface MAController ()
 
@@ -51,7 +50,6 @@
     // Do any additional setup after loading the view.
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    //[super ];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     tap.cancelsTouchesInView = NO;
@@ -311,29 +309,33 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 12) {
         return MAX(6,6) + 1; //TODO add getNumberOfClasses for people with 7 or 8 classes
-    } else if (section == 1) {
+    } else if (section == 0) {
         return MIN([[MAManager sharedManager].hourlyForecast count], 6) + 1;
     } else {
         return MIN([[MAManager sharedManager].dailyForecast count], 6) + 1;
     }
+
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (MAGradeCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CellIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MAGradeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Redefine layout variables in method from `viewDidLoad`
+    
+//    // Redefine layout variables in method from `viewDidLoad`
     CGFloat inset = 20; // For padding
     
     
     if (! cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[MAGradeCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier cellForRowAtIndexPath:indexPath];
     }
     
+
     // Sets up attributes of each cell
-    cell.selectionStyle = UITableViewCellSelectionStyleNone; //TODO none
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor whiteColor];
@@ -388,11 +390,12 @@
             [self configureDailyCell:cell weather:weather];
         }
     }
-    
+
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
+
 
 - (void)configureHeaderCell:(UITableViewCell *)cell title:(NSString *)title {
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
