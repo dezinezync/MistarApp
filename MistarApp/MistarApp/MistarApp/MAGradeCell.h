@@ -10,4 +10,6 @@
 
 @interface MAGradeCell : UITableViewCell
 
+@property (nonatomic, strong) UIButton *button; //Use your button's Class there. 
+
 @end
